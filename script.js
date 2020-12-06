@@ -38,3 +38,19 @@ function setTheme(mode){
 
 	localStorage.setItem('theme', mode)
 }
+
+function myFunction(para) {
+  var dots = document.getElementById(`.post-intro[paragraph="${para}"].dots");
+  var moreText = document.getElementById(`.post-intro[paragraph="${para}"]."more");
+  var btnText = document.getElementById(`.post-intro[paragraph="${para}"]."myBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
