@@ -98,6 +98,7 @@ h6 { font-size: 16px;}
 	box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
 
 	display: grid;
+	width: 100%;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas: 
 		'nav-wrapper nav-wrapper'
@@ -185,16 +186,16 @@ h6 { font-size: 16px;}
 	display: block;
 	margin:0 auto;
 
-	height: 240px;
-	width: 240px;
+	height: 280px;
+	width: 280px;
 	object-fit: cover;
 	border:2px solid var(--borderColor);
 }
 
 
-#theme-options-wrapper{
+/* #theme-options-wrapper{
 	display: flex;
-	justify-content: center;
+	align-content: right; */
 }
 
 .theme-dot{
@@ -238,32 +239,31 @@ h6 { font-size: 16px;}
 #settings-note{
 	font-size: 12px;
 	font-style: italic;
-	text-align: center;
+	text-align: right;
 }
 
 .right-column{
 	grid-area: right-column;
-	display: grid;
-	align-content: center;
+	align-content: right;
 
-	padding-top: 10px;
+	padding-top: 25px;
 	padding-bottom: 50px;
 }
 
 
 #preview-shadow{
 	background-color: var(--previewShadow);
-	max-width: 400px;
-	height: 180px;
+	max-width: 496px;
+	height: 320px;
 	padding-left: 30px;
-	padding-top: 20px;
+	padding-top: 30px;
 }
 
 #preview{
-	width: 400px;
+	width: 500px;
 	border:1.5px solid #17a2b8;
 	background-color: var(--previewBg);
-	padding:15px;
+	padding:25px;
 	position: relative;
 }
 
@@ -307,12 +307,6 @@ h6 { font-size: 16px;}
 }
 
 
-#skills{
-	display: flex;
-	justify-content: space-evenly;
-	background-color: var(--previewShadow);
-}
-
 .social-links{
 	display: grid;
 	align-content: center;
@@ -320,7 +314,7 @@ h6 { font-size: 16px;}
 }
 
 #social_img{
-	width: 100%;
+	width: 80%;
 }
 
 
