@@ -1,72 +1,59 @@
 console.log('Its working')
 
-let theme = localStorage.getItem('theme')
+/* Read more button */
 
-if(theme == null){
-	setTheme('light')
-}else{
-	setTheme(theme)
-}
+document.querySelectorAll(".showmore").forEach(function (p) {
+  p.querySelector("a").addEventListener("click", function () {
+    p.classList.toggle("show");
+    this.textContent = p.classList.contains("show") ? "Read Less" : "Read More";
+  });
+});
 
-let themeDots = document.getElementsByClassName('theme-dot')
+/*---------------------------------------
+ Fully functional contact form */
 
+window.addEventListener("DOMContentLoaded", function () {
+  // get the form elements defined in your form HTML above
 
-for (var i=0; themeDots.length > i; i++){
-	themeDots[i].addEventListener('click', function(){
-		let mode = this.dataset.mode
-		console.log('Option clicked:', mode)
-		setTheme(mode)
-	})
-}
+  var form = document.getElementById("my-form");
+  // var button = document.getElementById("my-form-button");
+  var status = document.getElementById("status");
 
-function setTheme(mode){
-	if(mode == 'light'){
-		document.getElementById('theme-style').href = 'default.css'
-	}
+  // Success and Error functions for after the form is submitted
 
-	if(mode == 'blue'){
-		document.getElementById('theme-style').href = 'blue.css'
-	}
-
-	if(mode == 'green'){
-		document.getElementById('theme-style').href = 'green.css'
-	}
-
-	if(mode == 'purple'){
-		document.getElementById('theme-style').href = 'purple.css'
-	}
-
-	localStorage.setItem('theme', mode)
-}
-
-function myFunction(para){
-  var dots = document.getElementById(`.post-intro[paragraph="${para}"].dots`);
-  var moreText = document.getElementById(`.post-intro[paragraph="${para}"]."more`);
-  var btnText = document.getElementById(`.post-intro[paragraph="${para}"]."myBtn`);
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    btnText.innerHTML = "Read more"; 
-    moreText.style.display = "none";
-  } else {
-    dots.style.display = "none";
-    btnText.innerHTML = "Read less"; 
-    moreText.style.display = "inline";
+  function success() {
+    form.reset();
+    status.classList.add("success");
+    status.innerHTML = "Thanks!";
   }
-}
 
-function readMore(city) {
-    let dots = document.querySelector(`.post-intro[paragraph="${para}"].dots"`);
-    let moreText = document.querySelector(`.post-intro[paragraph="${para}"].dots"`); 
-    let btnText = document.querySelector(`.card[data-city="${city}"] .myBtn`);
+  function error() {
+    status.classList.add("error");
+    status.innerHTML = "Oops! There was a problem.";
+  }
 
-    if (dots.style.display === "none") {
-        dots.style.display = "inline";
-        btnText.textContent = "Read more";
-        moreText.style.display = "none";
+  // handle the form submission event
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var data = new FormData(form);
+    ajax(form.method, form.action, data, success, error);
+  });
+});
+
+// helper function for sending an AJAX request
+
+function ajax(method, url, data, success, error) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, url);
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== XMLHttpRequest.DONE) return;
+    if (xhr.status === 200) {
+      success(xhr.response, xhr.responseType);
     } else {
-        dots.style.display = "none";
-        btnText.textContent = "Read less"; 
-        moreText.style.display = "inline";
+      error(xhr.status, xhr.response, xhr.responseType);
     }
+  };
+  xhr.send(data);
 }
